@@ -71,11 +71,11 @@ public class Menu implements Serializable {
 					createTV();
 				}
 				 // end of IF statement
-				} while(new_media_item >=5 );
+				} while(new_media_item !=4 );
 			    break;
 
-				case 2:	findMedia();
-
+				case 2:
+					findMedia();
 					break;
 
 				case 3:
@@ -84,16 +84,16 @@ public class Menu implements Serializable {
 
 				case 4:
 					System.out.println("Would you like to exit? (1 for yes and 2 for no)");
-					if (in.nextInt() == 1){
-						menu = 9;}
-						else{
-							menu = 0;
+					if (in.nextInt() == 1) {
+						menu = 9;
+					} else {
+						menu = 0;
 					}
-
+					break;
 			}//end of the do section of the do loop
-			 } while(menu <= 8);
+	 } while(menu <= 8);
 
-			}
+}
 
 				// end of main
 public static void createFilm(){
@@ -201,87 +201,94 @@ public static void findMedia(){
 
 	System.out.println("Enter the Film Title:");
     title = in.next();
+    Film media = null;
 
-for (int i=0; i < myfilm.size(); i++){
-	if (myfilm.get(i).getTitle().equals(title)){
-
-		System.out.println( myfilm.get(i).getTitle() + " - " + myfilm.get(i).getYear_of_release() + " - " + myfilm.get(i).getDuration() + " - " + myfilm.get(i).getStudio() + " - " +
-		myfilm.get(i).getDirector() + " - " + myfilm.get(i).getStar_rating() + "\n");
+    for (int i=0; i < myfilm.size(); i++){
+		if (myfilm.get(i).getTitle().equals(title)){
+			System.out.println( myfilm.get(i).getTitle() + " - " + myfilm.get(i).getYear_of_release() + " - " + myfilm.get(i).getDuration() + " - " + myfilm.get(i).getStudio() + " - " +
+			myfilm.get(i).getDirector() + " - " + myfilm.get(i).getStar_rating() + "\n");
+			media = myfilm.get(i);
+		}
 	}
 
-		int film_menu = 0;
+	if(media == null) {
+		System.out.println("Media not found");
+		break;
+	}
 
-		do{
-			System.out.println("1. Edit " + myfilm.get(i).getTitle());
-			System.out.println("2. Delete " +  myfilm.get(i).getTitle() + " from library");
-			System.out.println("3. Go Back");
-			film_menu = in.nextInt();
+	int film_menu = 0;
 
-			switch(film_menu){
+	do{
+		System.out.println("1. Edit " + media.getTitle());
+		System.out.println("2. Delete " +  media.getTitle() + " from library");
+		System.out.println("3. Go Back");
+		film_menu = in.nextInt();
 
-				case 1:
-					int film_edit_menu = 0;
-					do {
+		switch(film_menu){
 
-						System.out.println("1. Edit Title\n2. Edit Year of Release\n3. Edit Duration\n4. Edit Studio\n5. Edit Director\n6. Edit Star Rating\n7. Go back");
-						film_edit_menu = in.nextInt();
+			case 1:
+				int film_edit_menu = 0;
+				do {
 
-						if(film_edit_menu == 1) {
-							System.out.println("Change Title from " + myfilm.get(i).getTitle() );
-							myfilm.get(i).setTitle(in.next());
-						}
+					System.out.println("1. Edit Title\n2. Edit Year of Release\n3. Edit Duration\n4. Edit Studio\n5. Edit Director\n6. Edit Star Rating\n7. Go back");
+					film_edit_menu = in.nextInt();
 
-						else if(film_edit_menu == 2) {
-							System.out.println("Change Year of Release from " + myfilm.get(i).getYear_of_release() );
-							myfilm.get(i).setYear_of_release(in.nextInt());
-						}
-
-						else if(film_edit_menu == 3) {
-							System.out.println("Change Duration from " + myfilm.get(i).getDuration() );
-							myfilm.get(i).setDuration(in.next());
-						}
-
-						else if(film_edit_menu == 4) {
-							System.out.println("Change Studio from " + myfilm.get(i).getStudio() );
-							myfilm.get(i).setStudio(in.next());
-						}
-
-						else if(film_edit_menu == 5) {
-							System.out.println("Change Director from " + myfilm.get(i).getDirector() );
-							myfilm.get(i).setDirector(in.next());
-						}
-
-						else if(film_edit_menu == 6) {
-							System.out.println("Change Star Rating from " + myfilm.get(i).getStar_rating() );
-							myfilm.get(i).setStar_rating(in.next());
-						}
-
-					} while (film_edit_menu <= 6);
-
-					break;
-
-				case 2:
-
-					System.out.println("Are you sure you want to delete " + myfilm.get(i).getTitle() + "? (1 for yes, 0 for no");
-					if(in.nextInt() == 1){
-						myfilm.remove(i);
+					if(film_edit_menu == 1) {
+						System.out.println("Change Title from " + media.getTitle() );
+						media.setTitle(in.next());
 					}
 
-					break;
-			}
+					else if(film_edit_menu == 2) {
+						System.out.println("Change Year of Release from " + media.getYear_of_release() );
+						media.setYear_of_release(in.nextInt());
+					}
+
+					else if(film_edit_menu == 3) {
+						System.out.println("Change Duration from " + media.getDuration() );
+						media.setDuration(in.next());
+					}
+
+					else if(film_edit_menu == 4) {
+						System.out.println("Change Studio from " + media.getStudio() );
+						media.setStudio(in.next());
+					}
+
+					else if(film_edit_menu == 5) {
+						System.out.println("Change Director from " + media.getDirector() );
+						media.setDirector(in.next());
+					}
+
+					else if(film_edit_menu == 6) {
+						System.out.println("Change Star Rating from " + media.getStar_rating() );
+						media.setStar_rating(in.next());
+					}
+
+				} while (film_edit_menu <= 6);
+
+				break;
+
+			case 2:
+
+				System.out.println("Are you sure you want to delete " + media.getTitle() + "? (1 for yes, 0 for no");
+				if(in.nextInt() == 1){
+					myfilm.remove(media);
+				}
+
+				break;
+		}
 
 
-		} while (film_menu <=3);
-		//else {System.out.println("I hate java");}
+	} while (film_menu <=3);
+	//else {System.out.println("I hate java");}
 
-			break;
+	break;
 
 	case 2:
 
 	System.out.println("Enter the Audio Track Title:");
 	title = in.next();
 
-	for (int i=0; i < myaudio.size(); i++);{
+	for (int i=0; i < myaudio.size(); i++) {
 		if (myaudio.get(i).getTitle().equals(title)){
 
 			System.out.println( myaudio.get(i).getTitle() + " - " + myaudio.get(i).getYear_of_release() + " - " + myaudio.get(i).getDuration() + " - " + myaudio.get(i).getArtist() + " - " +
@@ -339,8 +346,9 @@ for (int i=0; i < myfilm.size(); i++){
 
 
 					break;
-
+			}
 			} while (audio_menu <=2);
+
 
 			}
 		break;
@@ -349,7 +357,7 @@ for (int i=0; i < myfilm.size(); i++){
 			System.out.println("Enter the TV Programme Title:");
 			title = in.next();
 
-			for (int i=0; i >myTV.size(); i++);{
+			for (int i=0; i >myTV.size(); i++) {
 				if (myTV.get(i).getTitle().equals(title)){
 					System.out.println( myTV.get(i).getTitle() + " - " + myTV.get(i).getYear_of_release() + " - Series " + myTV.get(i).getSeries() + " - Episode " + myTV.get(i).getEpisode() + " -Channel: " +
 							myTV.get(i).getChannel() + " - Studio: " + myTV.get(i).getStudio() + " - " + myTV.get(i).getStar_rating() + "\n");
